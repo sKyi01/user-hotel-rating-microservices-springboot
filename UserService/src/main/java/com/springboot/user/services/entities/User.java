@@ -27,6 +27,8 @@ public class User {
     @Column(length = 1000)
     private String about;
 
+
+
     @Transient
     private List<Rating> rating = new ArrayList<>();
 
@@ -40,6 +42,7 @@ public class User {
                 ", about='" + about + '\'' +
                 '}';
     }
+
 
 
 }

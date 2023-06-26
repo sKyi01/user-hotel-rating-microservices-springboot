@@ -23,6 +23,8 @@ public class UserServiceController {
     @PostMapping("/register")
     public ResponseEntity<User> regiserUser(@RequestBody User u) {
 
+        System.out.println("SKY");
+
         System.out.println("given output :"+ u);
 
         User u1 = userService.saveUser(u);
