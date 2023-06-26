@@ -1,0 +1,3 @@
+[submodule "user-hotel-rating-microservices-springboot"]
+	path = user-hotel-rating-microservices-springboot
+	url = https://github.com/sKyi01/user-hotel-rating-microservices-springboot.git

@@ -1,0 +1,16 @@
+server:
+  port: 4321
+
+
+spring:
+     datasource:
+          url: jdbc:oracle:thin:@localhost:1521:orcl
+          username: system
+          password: akash
+          driver-class-name: oracle.jdbc.OracleDriver
+     jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+    
+    
