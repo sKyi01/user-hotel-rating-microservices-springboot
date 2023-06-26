@@ -28,10 +28,8 @@ public class User {
     private String about;
 
     @Transient
-    private List<Rating> rating=new ArrayList<>();
+    private List<Rating> rating = new ArrayList<>();
 
-    @Transient
-    int a=10;
 
     @Override
     public String toString() {

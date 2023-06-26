@@ -3,16 +3,14 @@ server:
 
 
 spring:
-  datasource:
-    username: system
-    password: akash
-    url: jdbc:oracle:thin:@localhost:1521:orcl
-    driver-class-name: oracle.jdbc.OracleDriver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.Oracle12cDialect
-    show-sql: true
+     datasource:
+          url: jdbc:oracle:thin:@localhost:1521:orcl
+          username: system
+          password: akash
+          driver-class-name: oracle.jdbc.OracleDriver
+     jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
     
     

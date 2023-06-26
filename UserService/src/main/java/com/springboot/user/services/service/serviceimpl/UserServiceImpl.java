@@ -1,16 +1,16 @@
-package com.springboot.user.services.service;
+package com.springboot.user.services.service.serviceimpl;
 
 import com.springboot.user.services.entities.User;
 import com.springboot.user.services.exception.ResourceNotFoundException;
 import com.springboot.user.services.exception.UserNotFoundException;
 import com.springboot.user.services.repository.UserRepository;
+import com.springboot.user.services.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(u);
     }
 
+
     @Override
     public User getUserById(String id) {
 
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUser() {
         return userRepo.findAll();
     }
+
 
     @Override
     public User updateUser(String id, User user) {
