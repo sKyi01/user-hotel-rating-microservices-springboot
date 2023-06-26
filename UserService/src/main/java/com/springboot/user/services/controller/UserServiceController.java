@@ -20,7 +20,7 @@ public class UserServiceController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/registerUser")
     public ResponseEntity<User> regiserUser(@RequestBody User u) {
 
         System.out.println("SKY");
@@ -33,7 +33,7 @@ public class UserServiceController {
 
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/getUserById/{id}")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
 
         User u1 = userService.getUserById(id);
@@ -42,7 +42,7 @@ public class UserServiceController {
 
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getUserAll")
     public ResponseEntity<List<User>> getAll() {
 
         List<User> u1 = userService.getAllUser();
