@@ -13,19 +13,17 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-   public ResponseEntity<Map<String,Object>> notFoundExceptionHandler(ResourceNotFoundException ex){
-        Map m=new HashMap();
-        m.put("message",ex.getMessage());
-        m.put("success",false);
+    public ResponseEntity<Map<String, Object>> notFoundExceptionHandler(ResourceNotFoundException ex) {
+        Map m = new HashMap();
+        m.put("message", ex.getMessage());
+        m.put("success", false);
         m.put("status", HttpStatus.NOT_FOUND);
 
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(m);
 
 
-   }
-
-
+    }
 
 
 }

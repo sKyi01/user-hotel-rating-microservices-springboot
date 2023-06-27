@@ -36,8 +36,8 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel updateHotel(String id, Hotel hotel) {
-        Optional<Hotel> h1=hotelRepository.findById(id);
-        Hotel h2=h1.get();
+        Optional<Hotel> h1 = hotelRepository.findById(id);
+        Hotel h2 = h1.get();
         h2.setHotelId(hotel.getHotelId());
         h2.setName(hotel.getName());
         h2.setAbout(hotel.getAbout());

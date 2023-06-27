@@ -15,13 +15,9 @@ public interface HotelService {
 
     List<Hotel> getAll();
 
-    Hotel updateHotel(String id,Hotel hotel);
+    Hotel updateHotel(String id, Hotel hotel);
 
     Hotel deleteHotelById(String id);
-
-
-
-
 
 
 }

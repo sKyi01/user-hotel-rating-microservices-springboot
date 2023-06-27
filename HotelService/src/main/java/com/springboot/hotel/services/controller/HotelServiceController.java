@@ -16,33 +16,31 @@ public class HotelServiceController {
     private HotelService hotelService;
 
     @PostMapping("/saveHotel")
-    public ResponseEntity<Hotel> saveHotel(@RequestBody Hotel hotel){
+    public ResponseEntity<Hotel> saveHotel(@RequestBody Hotel hotel) {
 
-       Hotel h1=hotelService.saveHotel(hotel);
-       return ResponseEntity.status(HttpStatus.CREATED).body(h1);
-
-
+        Hotel h1 = hotelService.saveHotel(hotel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(h1);
 
 
     }
 
     @GetMapping("/getHotelById/{id}")
-    public ResponseEntity<Hotel> getHotelById(@PathVariable String id){
+    public ResponseEntity<Hotel> getHotelById(@PathVariable String id) {
 
-        Hotel h1=hotelService.getHotelById(id);
+        Hotel h1 = hotelService.getHotelById(id);
         return ResponseEntity.status(HttpStatus.OK).body(h1);
 
 
     }
+
     @GetMapping("/getHotelAll")
-    public ResponseEntity<List<Hotel>> getHotelAll(){
+    public ResponseEntity<List<Hotel>> getHotelAll() {
 
-       List<Hotel> h1=hotelService.getAll();
+        List<Hotel> h1 = hotelService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(h1);
 
 
     }
-
 
 
 }
