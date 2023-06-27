@@ -2,7 +2,6 @@ package com.springboot.user.services.service;
 
 
 import com.springboot.user.services.entities.User;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

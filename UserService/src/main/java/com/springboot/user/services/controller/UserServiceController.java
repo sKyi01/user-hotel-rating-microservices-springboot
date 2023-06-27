@@ -2,7 +2,6 @@ package com.springboot.user.services.controller;
 
 
 import com.springboot.user.services.entities.User;
-
 import com.springboot.user.services.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import java.util.List;
 public class UserServiceController {
 
 
-
     @Autowired
     private UserService userService;
 
@@ -25,7 +23,7 @@ public class UserServiceController {
 
         System.out.println("SKY");
 
-        System.out.println("given output :"+ u);
+        System.out.println("given output :" + u);
 
         User u1 = userService.saveUser(u);
         return ResponseEntity.status(HttpStatus.CREATED).body(u1);
