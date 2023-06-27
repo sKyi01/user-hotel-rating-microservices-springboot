@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RatingServiceImpl implements RatingService{
+public class RatingServiceImpl implements RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
@@ -29,6 +29,6 @@ public class RatingServiceImpl implements RatingService{
 
     @Override
     public List<Rating> getRatingByHotelId(String hotelId) {
-        return ratingRepository.getRatingByHotelId(hotelId) ;
+        return ratingRepository.getRatingByHotelId(hotelId);
     }
 }
