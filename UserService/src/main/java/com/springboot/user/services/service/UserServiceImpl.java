@@ -1,5 +1,6 @@
 package com.springboot.user.services.service;
 
+import com.springboot.user.services.external.services.HotelServiceFeignClient;
 import com.springboot.user.services.entities.Hotel;
 import com.springboot.user.services.entities.Rating;
 import com.springboot.user.services.entities.User;
@@ -9,14 +10,11 @@ import com.springboot.user.services.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     private Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
 
+    @Autowired
+    private HotelServiceFeignClient hotelServiceFeignClient;
+
     @Override
     public User saveUser(User u) {
         String userId = UUID.randomUUID().toString();
@@ -40,16 +41,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String id) {
 
+        String ratingHostName="RATING-SERVICE";
+        String hotelHostName="HOTEL-SERVICE";
+
         User user=userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Not Found By Provided Id !!!"));
-        Rating[] ratingOfUser=restTemplate.getForObject("http://localhost:6543/rating/getUserById/"+user.getUserId(), Rating[].class);
+        Rating[] ratingOfUser=restTemplate.getForObject("http://"+ratingHostName+"/rating/getUserById/"+user.getUserId(), Rating[].class);
         logger.info("{}",ratingOfUser);
 
         List<Rating> ratings=Arrays.stream(ratingOfUser).toList();
         List<Rating> ratingList= ratings.stream().map(rating -> {
 
-                    ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://localhost:5432/hotel/getHotelById/" + rating.getHotelId(), Hotel.class);
-                    Hotel hotel = forEntity.getBody();
-                    logger.info("response status code : {} ", forEntity.getStatusCode());
+                  //  ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://"+hotelHostName+"/hotel/getHotelById/" + rating.getHotelId(), Hotel.class);
+                    Hotel hotel = hotelServiceFeignClient.getHotelById(rating.getHotelId());
+                //    logger.info("response status code : {} ", forEntity.getStatusCode());
 
                     rating.setHotel(hotel);
                     return rating;
