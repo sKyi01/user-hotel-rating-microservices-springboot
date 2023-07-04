@@ -5,6 +5,9 @@ server:
 spring:
   application:
     name: API-GATEWAY
+  config:
+    import:
+      optional:configserver:http://localhost:0987
 
 
   main:

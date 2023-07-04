@@ -42,5 +42,26 @@ public class HotelServiceController {
 
     }
 
+    @PutMapping("/updateHotelById/{id}")
+    public ResponseEntity<Hotel> updateHotelById(@PathVariable String id,@RequestBody Hotel hotel) {
+
+
+
+        Hotel h1 = hotelService.updateHotel(id,hotel);
+        return ResponseEntity.status(HttpStatus.OK).body(h1);
+
+
+    }
+
+    @DeleteMapping("/deleteHotelById/{id}")
+    public ResponseEntity<Hotel> deleteHotelById(@PathVariable String id){
+        Hotel h1=hotelService.deleteHotelById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(h1);
+
+
+    }
+
+
+
 
 }

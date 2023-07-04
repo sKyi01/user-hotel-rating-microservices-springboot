@@ -4,8 +4,10 @@ spring:
       uri: mongodb://localhost:27017
       database: microservices
   application:
-    name: RATING_SERVICE
-
+    name: RATING-SERVICE
+  config:
+    import:
+      optional:configserver:http://localhost:0987
 
 
 

@@ -15,7 +15,11 @@ spring:
     database-platform: org.hibernate.dialect.Oracle12cDialect
     show-sql: true
   application:
-    name: HOTEL_SERVICE
+    name: HOTEL-SERVICE
+
+  config:
+    import:
+      optional:configserver:http://localhost:0987
 
 eureka:
   instance:

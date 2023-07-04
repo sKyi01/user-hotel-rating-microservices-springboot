@@ -3,6 +3,7 @@ package com.springboot.user.services.controller;
 
 import com.springboot.user.services.entities.User;
 import com.springboot.user.services.service.UserService;
+import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +52,23 @@ public class UserServiceController {
 
 
     }
+
+
+    @PutMapping("/updateUserById/{id}")
+    public ResponseEntity<User> updateUserById(@RequestBody User u, @PathVariable String id){
+        User u1=userService.updateUser(id,u);
+        return ResponseEntity.status(HttpStatus.OK).body(u1);
+
+
+    }
+
+    @DeleteMapping("/deleteUserById/{id}")
+    public ResponseEntity<User> deleteUserById(@PathVariable String id){
+
+        User u1=userService.deleteUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body(u1);
+    }
+
+
 
 }

@@ -30,6 +30,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private HotelServiceFeignClient hotelServiceFeignClient;
 
+
+
     @Override
     public User saveUser(User u) {
         String userId = UUID.randomUUID().toString();
@@ -109,4 +111,13 @@ public class UserServiceImpl implements UserService {
         return u1;
 
     }
+
+    /*@Test
+    public void createRating(){
+
+        Rating rating =Rating.builder().rating(123).ratingId("").userId("").hotelId("").feedback("by testing").build();
+        ratingServiceFeignClient.saveRating(rating);
+
+        System.out.println("rating created by user");
+    }*/
 }

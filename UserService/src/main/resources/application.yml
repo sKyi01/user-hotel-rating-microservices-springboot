@@ -1,7 +1,6 @@
 server:
   port: 4321
 
-
 spring:
   datasource:
     username: system
@@ -17,12 +16,17 @@ spring:
   application:
     name: USER-SERVICE
 
-eureka:
-  instance:
-    prefer-ip-address: true
+  config:
+      import:
+         optional:configserver:http://localhost:0987
 
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:7654/eureka
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#
+#  client:
+#   fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:7654/eureka

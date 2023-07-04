@@ -2,6 +2,7 @@ package com.springboot.rating.services.controller;
 
 import com.springboot.rating.services.entities.Rating;
 import com.springboot.rating.services.service.RatingService;
+import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,8 @@ public class RatingServiceController {
 
 
     }
+
+
 
 
 }
