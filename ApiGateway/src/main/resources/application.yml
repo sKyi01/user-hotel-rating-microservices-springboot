@@ -1,0 +1,38 @@
+server:
+  port: 9876
+
+
+spring:
+  application:
+    name: API-GATEWAY
+
+
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id : USER-SERVICE
+          uri : lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+
+        - id: HOTEL-SERVICE
+          uri: lb://HOTEL-SERVICE
+          predicates:
+            - Path=/hotel/**
+
+        - id: RATING-SERVICE
+          uri: lb://RATING-SERVICE
+          predicates:
+            - Path=/rating/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:7654/eureka
