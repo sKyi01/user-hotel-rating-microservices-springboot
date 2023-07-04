@@ -1,0 +1,24 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:7654/eureka
+
+server:
+  port: 0987
+
+
+spring:
+  application:
+    name: CONFIG-SERVER
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sKyi01/UHR-microservices-config
+          clone-on-start: true
