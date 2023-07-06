@@ -4,6 +4,7 @@ package com.springboot.user.services.controller;
 import com.springboot.user.services.entities.User;
 import com.springboot.user.services.service.UserService;
 import com.springboot.user.services.service.UserServiceImpl;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,8 @@ public class UserServiceController {
 
     @GetMapping("/getUserById/{id}")
     //@CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelFallback")
-    @Retry(name = "ratingHotelService", fallbackMethod = "ratingHotelFallback")
+    //@Retry(name = "ratingHotelService", fallbackMethod = "ratingHotelFallback")
+    @RateLimiter(name="ratingHotelLimiter",fallbackMethod = "ratingHotelFallback")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
 
         logger.info("get single use handler ; UserController");
