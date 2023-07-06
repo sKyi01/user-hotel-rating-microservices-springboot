@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 
-@FeignClient(name="HOTEL-SERVICE")
+@FeignClient(name = "HOTEL-SERVICE")
 public interface HotelServiceFeignClient {
 
 
     @GetMapping("hotel/getHotelById/{id}")
-    Hotel getHotelById(@PathVariable("id")  String id);
-
+    Hotel getHotelById(@PathVariable("id") String id);
 
 
 }

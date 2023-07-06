@@ -1,11 +1,11 @@
 package com.springboot.user.services.service;
 
-import com.springboot.user.services.external.services.HotelServiceFeignClient;
 import com.springboot.user.services.entities.Hotel;
 import com.springboot.user.services.entities.Rating;
 import com.springboot.user.services.entities.User;
 import com.springboot.user.services.exception.ResourceNotFoundException;
 import com.springboot.user.services.exception.UserNotFoundException;
+import com.springboot.user.services.external.services.HotelServiceFeignClient;
 import com.springboot.user.services.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +28,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private HotelServiceFeignClient hotelServiceFeignClient;
-
 
 
     @Override
@@ -43,19 +45,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String id) {
 
-        String ratingHostName="RATING-SERVICE";
-        String hotelHostName="HOTEL-SERVICE";
+        String ratingHostName = "RATING-SERVICE";
+        String hotelHostName = "HOTEL-SERVICE";
 
-        User user=userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Not Found By Provided Id !!!"));
-        Rating[] ratingOfUser=restTemplate.getForObject("http://"+ratingHostName+"/rating/getUserById/"+user.getUserId(), Rating[].class);
-        logger.info("{}",ratingOfUser);
+        User user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Not Found By Provided Id !!!"));
+        Rating[] ratingOfUser = restTemplate.getForObject("http://" + ratingHostName + "/rating/getUserById/" + user.getUserId(), Rating[].class);
+        logger.info("{}", ratingOfUser);
 
-        List<Rating> ratings=Arrays.stream(ratingOfUser).toList();
-        List<Rating> ratingList= ratings.stream().map(rating -> {
+        List<Rating> ratings = Arrays.stream(ratingOfUser).toList();
+        List<Rating> ratingList = ratings.stream().map(rating -> {
 
-                  //  ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://"+hotelHostName+"/hotel/getHotelById/" + rating.getHotelId(), Hotel.class);
+                    //  ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://"+hotelHostName+"/hotel/getHotelById/" + rating.getHotelId(), Hotel.class);
                     Hotel hotel = hotelServiceFeignClient.getHotelById(rating.getHotelId());
-                //    logger.info("response status code : {} ", forEntity.getStatusCode());
+                    //    logger.info("response status code : {} ", forEntity.getStatusCode());
 
                     rating.setHotel(hotel);
                     return rating;
@@ -74,10 +76,7 @@ public class UserServiceImpl implements UserService {
         //User u=new User();
 
 
-        List<User> user=userRepo.findAll();
-
-
-
+        List<User> user = userRepo.findAll();
 
 
         return user;

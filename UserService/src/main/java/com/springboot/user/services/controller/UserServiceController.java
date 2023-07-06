@@ -3,12 +3,14 @@ package com.springboot.user.services.controller;
 
 import com.springboot.user.services.entities.User;
 import com.springboot.user.services.service.UserService;
-import jakarta.ws.rs.Path;
+import com.springboot.user.services.service.UserServiceImpl;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -17,11 +19,14 @@ import java.util.List;
 public class UserServiceController {
 
 
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+
     @Autowired
     private UserService userService;
 
 
-
+    //User Registration Url
     @PostMapping("/registerUser")
     public ResponseEntity<User> regiserUser(@RequestBody User u) {
 
@@ -35,13 +40,25 @@ public class UserServiceController {
 
     }
 
+    //Get User By Id Url
+
     @GetMapping("/getUserById/{id}")
+    @CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelFallback")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
 
         User u1 = userService.getUserById(id);
         return ResponseEntity.ok(u1);
 
 
+    }
+
+    // Implementing Fallback method
+    public ResponseEntity<User> ratingHotelFallback(String userId, Exception ex) {
+        logger.info("Fallback is executed because service is down ;" + ex.getMessage());
+        User user = User.builder().email("dummy@gmail.com").name("dunno").about("service is down").userId("5435").build();
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping("/getUserAll")
@@ -55,20 +72,19 @@ public class UserServiceController {
 
 
     @PutMapping("/updateUserById/{id}")
-    public ResponseEntity<User> updateUserById(@RequestBody User u, @PathVariable String id){
-        User u1=userService.updateUser(id,u);
+    public ResponseEntity<User> updateUserById(@RequestBody User u, @PathVariable String id) {
+        User u1 = userService.updateUser(id, u);
         return ResponseEntity.status(HttpStatus.OK).body(u1);
 
 
     }
 
     @DeleteMapping("/deleteUserById/{id}")
-    public ResponseEntity<User> deleteUserById(@PathVariable String id){
+    public ResponseEntity<User> deleteUserById(@PathVariable String id) {
 
-        User u1=userService.deleteUser(id);
+        User u1 = userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).body(u1);
     }
-
 
 
 }
