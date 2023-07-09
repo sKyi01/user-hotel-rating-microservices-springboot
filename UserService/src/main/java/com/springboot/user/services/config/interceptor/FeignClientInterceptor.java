@@ -14,15 +14,15 @@ import org.springframework.stereotype.Component;
 public class FeignClientInterceptor implements RequestInterceptor {
 
 
-
     @Autowired
     private OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager;
+
     @Override
     public void apply(RequestTemplate template) {
 
         String token = oAuth2AuthorizedClientManager.authorize(OAuth2AuthorizeRequest.withClientRegistrationId("my-internal-id").principal("internal").build()).getAccessToken().getTokenValue();
 
 
-        template.header("Authorization","bearer" + token);
+        template.header("Authorization", "bearer" + token);
     }
 }
