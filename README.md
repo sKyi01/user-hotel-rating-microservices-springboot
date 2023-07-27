@@ -53,7 +53,7 @@ For detailed API endpoint access based on user roles, refer to the API documenta
 ## Services
 The project consists of the following services:
 
-***UserService***: Responsible for user registration, authentication, and user-related operations.
+**UserService**: Responsible for user registration, authentication, and user-related operations.
 
 **RatingService**: Handles hotel rating and review submission, as well as retrieving hotel ratings.
 
