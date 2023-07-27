@@ -53,17 +53,17 @@ For detailed API endpoint access based on user roles, refer to the API documenta
 ## Services
 The project consists of the following services:
 
-UserService: Responsible for user registration, authentication, and user-related operations.
+**UserService**: Responsible for user registration, authentication, and user-related operations.
 
-RatingService: Handles hotel rating and review submission, as well as retrieving hotel ratings.
+**RatingService**: Handles hotel rating and review submission, as well as retrieving hotel ratings.
 
-HotelService: Manages hotel information and related operations.
+**HotelService**: Manages hotel information and related operations.
 
-ServiceRegistry: Utilizes Eureka Service Registry for service discovery and registration.
+**ServiceRegistry**: Utilizes Eureka Service Registry for service discovery and registration.
 
-ApiGateway: Uses Zuul API Gateway for routing and managing API requests.
+**ApiGateway**: Uses Zuul API Gateway for routing and managing API requests.
 
-ConfigServer: Provides centralized configuration management for microservices.
+**ConfigServer**: Provides centralized configuration management for microservices.
 
 
 ## License
